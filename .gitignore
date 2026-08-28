@@ -1,8 +1,6 @@
 .DS_Store
 Thumbs.db
 node_modules/
-.trabalho/
 
-# Originais de camera: 41-81 MB cada, nao vao para o repositorio.
-# As versoes servidas estao em midia/.
-*.PNG
+# Esta pasta contem SO o que vai para o ar. Originais de camera vivem em
+# ../FOTOS, gravacoes em ../SETS, e manifesto e notas em ../material.
