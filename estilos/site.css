@@ -25,12 +25,21 @@
 }
 .topo nav { display: flex; gap: var(--e4); }
 .topo nav a {
+  position: relative;
   font-family: var(--sans); font-size: var(--t-nota);
   letter-spacing: .16em; text-transform: uppercase;
   color: var(--fumaca); text-decoration: none;
+  padding-bottom: .3em;
   transition: color var(--rapido) var(--curva);
 }
+.topo nav a::after {
+  content: ""; position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 1px; background: var(--vinho-vivo);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--medio) var(--curva);
+}
 .topo nav a:hover { color: var(--osso); }
+.topo nav a:hover::after { transform: scaleX(1); }
 @media (max-width: 44rem) {
   .topo { gap: var(--e2); }
   .topo nav { gap: var(--e3); }
@@ -42,8 +51,12 @@
 .limiar {
   position: relative; isolation: isolate;
   min-height: 100svh;
-  display: grid; align-items: end;
-  padding: var(--e8) var(--gutter) var(--e6);
+  display: grid;
+  align-content: center;
+  padding: var(--e8) var(--gutter) var(--e7);
+}
+@media (min-width: 60rem) {
+  .limiar { padding-right: 40%; }
 }
 .limiar__fundo { position: absolute; inset: 0; z-index: -1; }
 .limiar__fundo img { width: 100%; height: 100%; object-fit: cover; object-position: 54% 34%; }
@@ -73,8 +86,8 @@
   font-size: var(--t-conduz);
   line-height: 1.44;
   color: var(--osso);
-  max-width: 22ch;
-  margin: 0 0 var(--e5);
+  max-width: 24ch;
+  margin: 0 0 var(--e6);
 }
 
 .entrar {
@@ -156,9 +169,12 @@
   animation: girar 6s linear infinite;
 }
 @keyframes girar { to { transform: rotate(360deg); } }
+.mov:hover .giro::before { animation-duration: 2.4s; }
 @media (prefers-reduced-motion: reduce) {
-  .giro::before { animation: none; }
+  .giro::before, .mov:hover .giro::before { animation: none; }
   .entrar:hover .agulha { animation: none; }
+  .generos li:hover { transform: none; }
+  .topo nav a::after { transition: none; }
 }
 
 .mov__texto { max-width: var(--medida); }
@@ -195,7 +211,9 @@
   padding: var(--e3) 0;
   border-bottom: 1px solid var(--aresta-clara);
   color: var(--osso);
+  transition: color var(--rapido) var(--curva), transform var(--medio) var(--curva);
 }
+.generos li:hover { color: var(--vinho-vivo); transform: translateX(.4rem); }
 .nota { margin: var(--e3) 0 0; }
 .mov--tensao { padding-bottom: var(--e6); }
 
@@ -273,24 +291,42 @@
 
 .mov--liberacao { padding-bottom: var(--e5); }
 
-/* ── Rodapé ────────────────────────────────────────────────────────── */
+/* ── Rodapé: fecha o set, nao indexa o site ────────────────────────── */
 .rodape {
   border-top: 1px solid var(--aresta);
-  padding: var(--e6) var(--gutter) var(--e4);
+  padding: var(--e7) var(--gutter) var(--e4);
   overflow: hidden;
 }
-.rodape__grade {
+
+/* A ultima coisa lida e a tese dela, nao um mapa de links. */
+.rodape__verso {
+  font-family: var(--serifa); font-weight: 300;
+  font-size: var(--t-grande); line-height: 1.1;
+  margin: 0 0 var(--e6); max-width: 14ch;
+}
+.rodape__verso em { font-style: italic; color: var(--vinho-vivo); }
+
+.rodape__linha {
   display: grid; gap: var(--e5);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  align-items: end;
+  padding-bottom: var(--e5);
+  border-bottom: 1px solid var(--aresta);
 }
-.rodape__bio { color: var(--fumaca); max-width: 30ch; margin: 0; }
-.rodape__titulo { margin: 0 0 var(--e3); }
-.rodape nav, .rodape__grade div { display: grid; gap: var(--e2); align-content: start; }
-.rodape a {
-  font-family: var(--serifa); color: var(--fumaca); text-decoration: none;
-  transition: color var(--rapido) var(--curva); width: fit-content;
+@media (min-width: 46rem) {
+  .rodape__linha { grid-template-columns: minmax(0, 28rem) auto; justify-content: space-between; }
 }
-.rodape a:hover { color: var(--osso); }
+.rodape__bio { color: var(--fumaca); margin: 0; }
+
+.rodape__acao {
+  font-family: var(--sans); font-size: var(--t-nota);
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--osso); text-decoration: none;
+  padding-bottom: var(--e2);
+  border-bottom: 1px solid var(--vinho-fio);
+  transition: border-color var(--medio) var(--curva);
+  white-space: nowrap;
+}
+.rodape__acao:hover { border-color: var(--osso); }
 
 /* A assinatura fecha a página: o nome dela ocupa a largura, em contorno,
    sem gritar. É o eco do LIMIAR — o set fecha onde abriu. */

@@ -218,29 +218,35 @@
 
 </main>
 
+<!-- Num site de uma página, três colunas de links viram burocracia: repetem
+     o menu que já está fixo no topo. O rodapé fecha o set, não indexa o
+     site. Ele carrega a última afirmação, o contato e a assinatura. -->
 <footer class="rodape">
-  <div class="rodape__grade">
+
+  <p class="rodape__verso">
+    Muda o endereço,<br>
+    <em>nunca a intenção.</em>
+  </p>
+
+  <div class="rodape__linha">
     <p class="rodape__bio">
       DJ e produtora. Techno hipnótico, minimal, deep e sonoridades
       atmosféricas. Fundadora do LIFEGROUND.
     </p>
-    <nav aria-label="Rodapé">
-      <p class="rodape__titulo">Nesta página</p>
-      <a href="#tensao">O set</a>
-      <a href="#suspensao">LIFEGROUND</a>
-      <a href="#liberacao">Contratar</a>
+
+    <nav class="rodape__contato" aria-label="Contato">
+      <a class="rodape__acao" href="/contratar">Fechar uma data</a>
+      <!-- [PENDENTE: REDES] Os perfis dela ainda não foram informados.
+           Um link vazio ou um ícone que não leva a lugar nenhum é pior
+           que ausência, então a lista entra quando os endereços vierem. -->
     </nav>
-    <div>
-      <p class="rodape__titulo">Booking</p>
-      <a href="/contratar">Fechar uma data</a>
-    </div>
   </div>
 
   <p class="assinatura" aria-hidden="true">Zaphyra</p>
 
   <p class="creditos">
-    Fotografia própria, tratada em duotone. Tipografia Archivo e Newsreader,
-    OFL 1.1, auto-hospedadas. © 2026 Zaphyra.
+    Fotografia própria. Tipografia Archivo e Newsreader, OFL 1.1,
+    auto-hospedadas. © 2026 Zaphyra.
   </p>
 </footer>
 

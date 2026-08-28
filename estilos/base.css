@@ -52,7 +52,13 @@ ul { margin: 0; padding: 0; list-style: none; }
 a { color: inherit; }
 
 /* ── Foco: anel de osso, nunca outline:none sem substituto ─────────── */
-:focus-visible { outline: 2px solid var(--foco); outline-offset: 4px; }
+/* Anel duplo: osso por dentro, vinho por fora. Um site que quer ser
+   lembrado nao usa o foco padrao de todo mundo. */
+:focus-visible {
+  outline: 2px solid var(--osso);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px var(--vinho-fio);
+}
 :focus:not(:focus-visible) { outline: none; }
 
 /* ── Pular para o conteúdo ─────────────────────────────────────────── */
