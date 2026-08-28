@@ -1,0 +1,300 @@
+/* ═══ ZAPHYRA — a página é um set ═══════════════════════════════════════
+   Quatro movimentos: tensão, suspensão, expansão, liberação. Não são
+   seções de landing page — são a estrutura declarada do trabalho dela.
+
+   O motivo recorrente é o JOG WHEEL: o círculo que gira. É o objeto
+   físico do ofício dela, e o método exige que o símbolo aponte para
+   coisa física.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Topo: discreto. O booking não grita aqui; ele é o fim do set. ──── */
+.topo {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--e4);
+  padding: var(--e3) var(--gutter);
+  background: linear-gradient(to bottom, var(--breu) 0%, rgba(10,6,9,.94) 55%, rgba(10,6,9,0) 100%);
+  padding-bottom: var(--e5);
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
+.topo > * { pointer-events: auto; }
+.marca {
+  font-family: var(--sans); font-weight: 500;
+  font-size: var(--t-min); letter-spacing: .34em; text-transform: uppercase;
+  text-decoration: none;
+}
+.topo nav { display: flex; gap: var(--e4); }
+.topo nav a {
+  font-family: var(--sans); font-size: var(--t-nota);
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--fumaca); text-decoration: none;
+  transition: color 200ms var(--curva);
+}
+.topo nav a:hover { color: var(--osso); }
+@media (max-width: 44rem) { .topo nav a:not(:last-child) { display: none; } }
+
+/* ── LIMIAR: a sala ocupa tudo. A imagem é o argumento. ─────────────── */
+.limiar {
+  position: relative; isolation: isolate;
+  min-height: 100svh;
+  display: grid; align-items: end;
+  padding: var(--e8) var(--gutter) var(--e6);
+}
+.limiar__fundo { position: absolute; inset: 0; z-index: -1; }
+.limiar__fundo img { width: 100%; height: 100%; object-fit: cover; object-position: 54% 34%; }
+.limiar::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to top, var(--breu) 0%, rgba(10,6,9,.86) 26%, rgba(10,6,9,.30) 62%, rgba(10,6,9,.10) 100%),
+    linear-gradient(to right, rgba(10,6,9,.82) 0%, rgba(10,6,9,.30) 38%, transparent 70%),
+    linear-gradient(0deg, rgba(94,20,38,.20), rgba(94,20,38,.20));
+}
+
+.sobrenome { margin: 0 0 var(--e3); }
+
+.nome {
+  font-family: var(--serifa);
+  font-size: var(--t-nome);
+  font-weight: 300;
+  line-height: .92;
+  letter-spacing: .12em;
+  margin: 0 0 var(--e4);
+  text-indent: .12em;
+}
+
+.verso {
+  font-family: var(--serifa);
+  font-style: italic;
+  font-size: var(--t-conduz);
+  line-height: 1.44;
+  color: var(--osso);
+  max-width: 22ch;
+  margin: 0 0 var(--e5);
+}
+
+.entrar {
+  display: inline-flex; align-items: center; gap: var(--e3);
+  font-family: var(--sans); font-size: var(--t-nota);
+  letter-spacing: .24em; text-transform: uppercase;
+  text-decoration: none; color: var(--osso);
+  padding-bottom: var(--e2);
+  border-bottom: 1px solid var(--vinho-fio);
+  transition: border-color 240ms var(--curva);
+  justify-self: start;
+}
+.entrar:hover { border-color: var(--osso); }
+.agulha { width: .85rem; height: 1.4rem; fill: none; stroke: var(--vinho-vivo); stroke-width: 1.6; }
+.entrar:hover .agulha { animation: descer 1.4s var(--curva) infinite; }
+@keyframes descer { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* ── MOVIMENTOS ─────────────────────────────────────────────────────── */
+.mov {
+  position: relative;
+  scroll-margin-top: var(--e6);
+  padding: var(--e6) var(--gutter);
+  display: grid;
+  gap: var(--e5);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 60rem) {
+  .mov {
+    padding: var(--e8) var(--gutter);
+    /* Coluna de leitura + coluna de apoio. Nao duas colunas iguais: texto
+       corrido quer medida, nao metade da tela. */
+    grid-template-columns: minmax(0, 40rem) minmax(0, 1fr);
+    column-gap: var(--e7);
+    align-items: start;
+  }
+  .mov__cabeca, .generos, .nota { grid-column: 1 / -1; }
+
+  /* I: o texto conduz na coluna de leitura; a lista atravessa. */
+  .mov--tensao .mov__texto { grid-column: 1; }
+
+  /* IV: chamada ao lado do texto, nao embaixo dele com vazio a direita. */
+  .mov--liberacao .grande { grid-column: 1; }
+  .mov--liberacao .mov__texto { grid-column: 1; }
+  .mov--liberacao .chamada { grid-column: 2; grid-row: 3; align-self: start; }
+}
+
+.mov__cabeca {
+  display: flex; align-items: center; gap: var(--e3);
+  padding-bottom: var(--e3);
+  border-bottom: 1px solid var(--aresta);
+}
+.mov__num { margin: 0; }
+.mov__nome {
+  font-family: var(--serifa); font-style: italic; font-weight: 300;
+  font-size: var(--t-mov); line-height: 1; color: var(--osso);
+  margin-left: auto;
+}
+
+/* O jog wheel. Gira devagar — repetição, não efeito. */
+.giro {
+  width: 1.15rem; height: 1.15rem; flex: none;
+  border: 1px solid var(--vinho-fio); border-radius: 50%;
+  position: relative;
+}
+.giro::after {
+  content: ""; position: absolute; inset: 34%;
+  background: var(--vinho-vivo); border-radius: 50%;
+}
+.giro::before {
+  content: ""; position: absolute; inset: -1px;
+  border: 1px solid transparent; border-top-color: var(--vinho-vivo);
+  border-radius: 50%;
+  animation: girar 6s linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .giro::before { animation: none; }
+  .entrar:hover .agulha { animation: none; }
+}
+
+.mov__texto { max-width: 38rem; }
+.mov__texto p:last-child { margin-bottom: 0; }
+.conduz { font-size: var(--t-conduz); line-height: 1.48; }
+.baixo { color: var(--fumaca); }
+.duplo { max-width: none; }
+@media (min-width: 60rem) {
+  .duplo { columns: 2; column-gap: var(--e5); }
+  .duplo p { break-inside: avoid; }
+}
+
+.grande {
+  font-family: var(--serifa); font-weight: 300;
+  font-size: var(--t-grande); line-height: 1.08;
+  margin: 0 0 var(--e4); max-width: 16ch;
+}
+
+/* ── Gêneros: nomeados com precisão, como o briefing exige ──────────── */
+.generos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  border-top: 1px solid var(--aresta);
+  margin-top: var(--e3);
+}
+.generos li {
+  font-family: var(--sans); font-size: var(--t-min);
+  font-stretch: 88%; letter-spacing: .06em;
+  padding: var(--e3) 0;
+  border-bottom: 1px solid var(--aresta);
+  color: var(--osso);
+}
+.nota { margin: var(--e3) 0 0; }
+
+.mov { isolation: isolate; }
+.mov__fundo { position: absolute; inset: 0; z-index: -2; }
+.mov__fundo img { width: 100%; height: 100%; object-fit: cover; object-position: 56% 46%; }
+
+/* ── II · LIFEGROUND: a única massa cheia do site ───────────────────── */
+.mov--suspensao::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to bottom, var(--breu) 0%, rgba(10,6,9,.58) 18%, rgba(10,6,9,.58) 82%, var(--breu) 100%),
+    linear-gradient(to right, rgba(46,11,24,.88) 0%, rgba(46,11,24,.52) 52%, rgba(46,11,24,.30) 100%);
+}
+.casa { max-width: var(--medida); }
+.casa__marca {
+  font-family: var(--sans); font-weight: 600; font-stretch: 78%;
+  font-size: var(--t-marca); line-height: .9; letter-spacing: .02em;
+  margin: 0 0 var(--e4); color: var(--osso);
+}
+.casa__texto p { color: var(--osso); }
+.lema {
+  font-family: var(--serifa); font-size: var(--t-conduz);
+  line-height: 1.32; margin: var(--e5) 0 var(--e4);
+  padding-left: var(--e3); border-left: 2px solid var(--vinho-vivo);
+}
+.lema em { font-style: italic; color: var(--vinho-vivo); }
+.casa__nota { color: var(--fumaca); margin: 0; }
+
+.cabine, .retrato { margin: 0; }
+.cabine figcaption {
+  font-family: var(--sans); font-size: var(--t-nota);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fumaca); margin-top: var(--e3);
+}
+.cabine img, .retrato img { width: 100%; }
+
+/* ── III: o retrato quebra a caixa e sangra para fora da margem ─────── */
+@media (min-width: 60rem) {
+  .retrato {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    margin-right: calc(var(--gutter) * -1);
+    align-self: start;
+  }
+  .mov--expansao .grande { grid-column: 1; }
+  .mov--expansao .duplo { grid-column: 1; columns: 1; }
+}
+
+/* No lugar da foto removida: a frase que se repete até virar textura.
+   O assunto da seção é repetição — a página faz, não descreve. */
+.eco {
+  grid-column: 1 / -1;
+  font-family: var(--serifa); font-style: italic; font-weight: 300;
+  font-size: clamp(1.15rem, 5.4vw, 4.4rem); line-height: 1.06;
+  color: transparent; -webkit-text-stroke: 1px var(--aresta);
+  margin: var(--e4) 0 0; user-select: none; overflow: hidden;
+  white-space: nowrap;
+}
+.eco::after { content: " · a repetição sustenta · a repetição sustenta"; }
+
+/* ── IV · A chegada ────────────────────────────────────────────────── */
+.chamada {
+  grid-column: 1;
+  display: inline-grid; gap: var(--e2);
+  justify-self: start;
+  padding: var(--e4) var(--e6) var(--e4) var(--e4);
+  text-decoration: none;
+  background: var(--vinho);
+  border: 1px solid var(--vinho-fio);
+  transition: background 260ms var(--curva), transform 260ms var(--curva);
+}
+.chamada:hover { background: #6E1830; transform: translateY(-2px); }
+.chamada__acao {
+  font-family: var(--serifa); font-size: var(--t-conduz);
+  line-height: 1.2; color: var(--osso);
+}
+@media (prefers-reduced-motion: reduce) {
+  .chamada { transition: background 260ms var(--curva); }
+  .chamada:hover { transform: none; }
+}
+
+.mov--liberacao { padding-bottom: var(--e5); }
+
+/* ── Rodapé ────────────────────────────────────────────────────────── */
+.rodape {
+  border-top: 1px solid var(--aresta);
+  padding: var(--e6) var(--gutter) var(--e4);
+  overflow: hidden;
+}
+.rodape__grade {
+  display: grid; gap: var(--e5);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+.rodape__bio { color: var(--fumaca); max-width: 30ch; margin: 0; }
+.rodape__titulo { margin: 0 0 var(--e3); }
+.rodape nav, .rodape__grade div { display: grid; gap: var(--e2); align-content: start; }
+.rodape a {
+  font-family: var(--serifa); color: var(--fumaca); text-decoration: none;
+  transition: color 200ms var(--curva); width: fit-content;
+}
+.rodape a:hover { color: var(--osso); }
+
+/* A assinatura fecha a página: o nome dela ocupa a largura, em contorno,
+   sem gritar. É o eco do LIMIAR — o set fecha onde abriu. */
+.assinatura {
+  font-family: var(--serifa); font-weight: 300;
+  font-size: clamp(2.6rem, 13vw, 11rem); line-height: .8;
+  letter-spacing: .06em;
+  color: transparent;
+  -webkit-text-stroke: 1px #3A2830;
+  margin: var(--e5) 0 var(--e3);
+  user-select: none;
+}
+.creditos {
+  font-family: var(--sans); font-size: var(--t-nota);
+  color: var(--fumaca); margin: 0; letter-spacing: .04em;
+}

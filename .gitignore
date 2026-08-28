@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.trabalho/
+
+# Originais de camera: 41-81 MB cada, nao vao para o repositorio.
+# As versoes servidas estao em midia/.
+*.PNG

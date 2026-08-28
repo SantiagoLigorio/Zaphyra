@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# O painel e os fluxos por token do booking nunca sao indexaveis.
+Disallow: /painel
+Disallow: /proposta
+Disallow: /decidir
+Disallow: /advancing
