@@ -16,7 +16,6 @@
   background: linear-gradient(to bottom, var(--breu) 0%, rgba(10,6,9,.94) 55%, rgba(10,6,9,0) 100%);
   padding-bottom: var(--e5);
   pointer-events: none;
-  backdrop-filter: blur(2px);
 }
 .topo > * { pointer-events: auto; }
 .marca {
@@ -29,10 +28,15 @@
   font-family: var(--sans); font-size: var(--t-nota);
   letter-spacing: .16em; text-transform: uppercase;
   color: var(--fumaca); text-decoration: none;
-  transition: color 200ms var(--curva);
+  transition: color var(--rapido) var(--curva);
 }
 .topo nav a:hover { color: var(--osso); }
-@media (max-width: 44rem) { .topo nav a:not(:last-child) { display: none; } }
+@media (max-width: 44rem) {
+  .topo { gap: var(--e2); }
+  .topo nav { gap: var(--e3); }
+  .topo nav a { letter-spacing: .08em; font-size: .62rem; }
+  .marca { letter-spacing: .2em; }
+}
 
 /* ── LIMIAR: a sala ocupa tudo. A imagem é o argumento. ─────────────── */
 .limiar {
@@ -80,7 +84,7 @@
   text-decoration: none; color: var(--osso);
   padding-bottom: var(--e2);
   border-bottom: 1px solid var(--vinho-fio);
-  transition: border-color 240ms var(--curva);
+  transition: border-color var(--medio) var(--curva);
   justify-self: start;
 }
 .entrar:hover { border-color: var(--osso); }
@@ -102,7 +106,7 @@
     padding: var(--e8) var(--gutter);
     /* Coluna de leitura + coluna de apoio. Nao duas colunas iguais: texto
        corrido quer medida, nao metade da tela. */
-    grid-template-columns: minmax(0, 40rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, var(--medida)) minmax(0, 1fr);
     column-gap: var(--e7);
     align-items: start;
   }
@@ -151,7 +155,7 @@
   .entrar:hover .agulha { animation: none; }
 }
 
-.mov__texto { max-width: 38rem; }
+.mov__texto { max-width: var(--medida); }
 .mov__texto p:last-child { margin-bottom: 0; }
 .conduz { font-size: var(--t-conduz); line-height: 1.48; }
 .baixo { color: var(--fumaca); }
@@ -209,25 +213,7 @@
 .lema em { font-style: italic; color: var(--vinho-vivo); }
 .casa__nota { color: var(--fumaca); margin: 0; }
 
-.cabine, .retrato { margin: 0; }
-.cabine figcaption {
-  font-family: var(--sans); font-size: var(--t-nota);
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--fumaca); margin-top: var(--e3);
-}
-.cabine img, .retrato img { width: 100%; }
 
-/* ── III: o retrato quebra a caixa e sangra para fora da margem ─────── */
-@media (min-width: 60rem) {
-  .retrato {
-    grid-column: 2;
-    grid-row: 2 / span 2;
-    margin-right: calc(var(--gutter) * -1);
-    align-self: start;
-  }
-  .mov--expansao .grande { grid-column: 1; }
-  .mov--expansao .duplo { grid-column: 1; columns: 1; }
-}
 
 /* No lugar da foto removida: a frase que se repete até virar textura.
    O assunto da seção é repetição — a página faz, não descreve. */
@@ -250,15 +236,15 @@
   text-decoration: none;
   background: var(--vinho);
   border: 1px solid var(--vinho-fio);
-  transition: background 260ms var(--curva), transform 260ms var(--curva);
+  transition: background var(--medio) var(--curva), transform var(--medio) var(--curva);
 }
-.chamada:hover { background: #6E1830; transform: translateY(-2px); }
+.chamada:hover { background: var(--vinho-hover); transform: translateY(-2px); }
 .chamada__acao {
   font-family: var(--serifa); font-size: var(--t-conduz);
   line-height: 1.2; color: var(--osso);
 }
 @media (prefers-reduced-motion: reduce) {
-  .chamada { transition: background 260ms var(--curva); }
+  .chamada { transition: background var(--medio) var(--curva); }
   .chamada:hover { transform: none; }
 }
 
@@ -279,7 +265,7 @@
 .rodape nav, .rodape__grade div { display: grid; gap: var(--e2); align-content: start; }
 .rodape a {
   font-family: var(--serifa); color: var(--fumaca); text-decoration: none;
-  transition: color 200ms var(--curva); width: fit-content;
+  transition: color var(--rapido) var(--curva); width: fit-content;
 }
 .rodape a:hover { color: var(--osso); }
 
@@ -290,7 +276,7 @@
   font-size: clamp(2.6rem, 13vw, 11rem); line-height: .8;
   letter-spacing: .06em;
   color: transparent;
-  -webkit-text-stroke: 1px #3A2830;
+  -webkit-text-stroke: 1px var(--aresta-clara);
   margin: var(--e5) 0 var(--e3);
   user-select: none;
 }

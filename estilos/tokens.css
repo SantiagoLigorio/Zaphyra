@@ -19,14 +19,20 @@
   --breu:        #0A0609;  /* fundo base                                */
   --porao:       #130C10;  /* superfície elevada                        */
   --aresta:      #241820;  /* fio, divisor                              */
+  --aresta-clara: #3A2830; /* contorno da assinatura                    */
+  --vestigio:    #1A0D14;  /* vinheta de topo, quase invisivel          */
 
   --vinho-massa: #2E0B18;  /* massa profunda (bloco LIFEGROUND)         */
   --vinho:       #5E1426;  /* superfície plena                          */
+  --vinho-hover: #6E1830;  /* superfície plena, sob o cursor            */
   --vinho-fio:   #A63A4F;  /* borda de interface — 3.20:1 sobre breu ✓AA */
   --vinho-vivo:  #C05469;  /* acento textual     — 4.52:1 sobre breu ✓AA */
 
   --osso:        #EAE0DE;  /* texto corrido      — 15.55:1 sobre breu ✓AAA */
   --fumaca:      #A29296;  /* texto secundário   —  6.80:1 sobre breu ✓AA */
+  /* --fumaca sobre --vinho da 4.42:1 e REPROVA. Sobre superficie vinho,
+     use este: 5.56:1 sobre vinho, 8.55:1 sobre breu. */
+  --fumaca-clara: #B5A5A9;
   --foco:        var(--osso);
 
   /* ── Tipografia ──────────────────────────────────────────────────────
@@ -51,8 +57,11 @@
   --e5: 3rem;   --e6: 4.8rem; --e7: 7.5rem; --e8: 11rem;
 
   --gutter: clamp(1.4rem, 5vw, 5.5rem);
-  --medida: 34rem;
+  /* UMA medida de leitura. Antes eram tres: 34rem, 38rem e 40rem. */
+  --medida: 38rem;
 
+  --rapido: 160ms;
+  --medio: 240ms;
   --lento: 900ms;
   --curva: cubic-bezier(.2, 0, 0, 1);
 }
