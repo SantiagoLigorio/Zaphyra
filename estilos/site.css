@@ -343,3 +343,40 @@
   font-family: var(--sans); font-size: var(--t-nota);
   color: var(--fumaca); margin: 0; letter-spacing: .04em;
 }
+
+/* ── Agenda ─────────────────────────────────────────────────────────────
+   Vive fora dos quatro movimentos porque pode não existir: nasce escondida
+   e só aparece se o booking devolver data confirmada. */
+.agenda {
+  padding: var(--e6) var(--gutter) var(--e7);
+  border-top: 1px solid var(--aresta);
+}
+.agenda[hidden] { display: none; }
+
+.agenda__rotulo {
+  font-family: var(--sans); font-size: var(--t-nota);
+  font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--fumaca); margin: 0 0 var(--e4);
+}
+.agenda__lista { display: grid; }
+.agenda__item {
+  display: flex; align-items: baseline; gap: var(--e4);
+  padding: var(--e3) 0;
+  border-bottom: 1px solid var(--aresta-clara);
+}
+.agenda__data {
+  display: flex; align-items: baseline; gap: .4em;
+  flex: none; min-width: 5.5rem;
+  font-family: var(--sans); font-stretch: 88%;
+}
+.agenda__dia {
+  font-size: var(--t-conduz); font-weight: 600;
+  color: var(--osso); line-height: 1;
+}
+.agenda__mes {
+  font-size: var(--t-nota); letter-spacing: .18em;
+  text-transform: uppercase; color: var(--vinho-vivo);
+}
+.agenda__onde {
+  font-family: var(--serifa); color: var(--osso);
+}

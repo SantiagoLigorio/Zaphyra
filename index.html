@@ -83,13 +83,13 @@
         anterior pediu.
       </p>
       <p>
-        Techno hipnótico. Linhas que se repetem até virar transe. Graves
-        que chegam ao corpo antes do ouvido. Texturas que abrem respiro
+        Techno hipnótico. A linha se repete até deixar de ser contada. O
+        grave chega ao corpo antes do ouvido. A textura abre respiro
         dentro da repetição.
       </p>
       <p class="baixo">
-        Não existe pico. Um pico é um instante. O que se constrói aqui tem
-        abertura, queda e respiro.
+        Não existe pico. Pico é um instante, e instante não sustenta
+        ninguém. O set tem abertura, queda e respiro.
       </p>
     </div>
 
@@ -102,7 +102,7 @@
       <li>deep techno</li>
       <li>sonoridades atmosféricas e experimentais</li>
     </ul>
-    <p class="nota">Dentro do eletrônico, de BPM alto a baixo.</p>
+    <p class="nota">Do eletrônico inteiro. Do que arrasta ao que corta.</p>
   </section>
 
 
@@ -170,8 +170,8 @@
       </p>
       <p>
         O rito não é literal. É o que a música faz com o estado de quem
-        está ali. A repetição sustenta. A textura envolve. A atenção vai
-        de fora para dentro.
+        está ali: a repetição sustenta, a textura envolve, e a atenção
+        vira de fora para dentro.
       </p>
     </div>
 
@@ -186,6 +186,21 @@
       <span>a repetição sustenta</span>
       <span>a repetição sustenta</span>
     </div>
+  </section>
+
+
+  <!-- ══ AGENDA ═══════════════════════════════════════════════════════
+       As datas vêm do sistema de booking, não de HTML editado à mão: só
+       as confirmadas, só as futuras. Ninguém precisa lembrar de atualizar
+       o site, e o site nunca mostra data vencida.
+
+       Nasce escondida e só aparece se houver data. Uma agenda vazia
+       anunciando que está vazia é pior que agenda nenhuma — e é por isso
+       que ela vive fora do fluxo dos quatro movimentos: ela pode não
+       existir, e o set continua inteiro.                               -->
+  <section class="agenda" id="agenda" hidden>
+    <p class="agenda__rotulo">Próximas datas</p>
+    <ol class="agenda__lista"></ol>
   </section>
 
 
@@ -250,6 +265,43 @@
        não é requisito, então o rodapé fica com o essencial. -->
   <p class="creditos">© 2026 Zaphyra.</p>
 </footer>
+
+<script>
+// A agenda vem do sistema de booking. Falha em silêncio de propósito: se o
+// endpoint não responder, a seção simplesmente não aparece — um site que
+// mostra "erro ao carregar agenda" para um contratante é pior que um site
+// sem agenda.
+(async () => {
+  const secao = document.getElementById('agenda')
+  if (!secao) return
+  try {
+    const r = await fetch('/api/agenda-publica', { headers: { accept: 'application/json' } })
+    if (!r.ok) return
+    const { datas } = await r.json()
+    if (!Array.isArray(datas) || datas.length === 0) return
+
+    const mes = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez']
+    const lista = secao.querySelector('.agenda__lista')
+
+    for (const d of datas) {
+      const [a, m, dia] = String(d.data).split('-')
+      if (!a || !m || !dia) continue
+      const onde = [d.local, d.cidade].filter(Boolean).join(', ')
+      const li = document.createElement('li')
+      li.className = 'agenda__item'
+      li.innerHTML =
+        '<time class="agenda__data" datetime="' + d.data + '">' +
+          '<span class="agenda__dia">' + dia + '</span>' +
+          '<span class="agenda__mes">' + (mes[+m - 1] || '') + '</span>' +
+        '</time>' +
+        '<span class="agenda__onde"></span>'
+      li.querySelector('.agenda__onde').textContent = onde || d.evento || ''
+      lista.appendChild(li)
+    }
+    secao.hidden = false
+  } catch { /* silêncio */ }
+})()
+</script>
 
 </body>
 </html>
