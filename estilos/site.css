@@ -103,7 +103,7 @@
 }
 @media (min-width: 60rem) {
   .mov {
-    padding: var(--e8) var(--gutter);
+    padding: var(--e7) var(--gutter) var(--e8);
     /* Coluna de leitura + coluna de apoio. Nao duas colunas iguais: texto
        corrido quer medida, nao metade da tela. */
     grid-template-columns: minmax(0, var(--medida)) minmax(0, 1fr);
@@ -112,8 +112,9 @@
   }
   .mov__cabeca, .generos, .nota { grid-column: 1 / -1; }
 
-  /* I: o texto conduz na coluna de leitura; a lista atravessa. */
-  .mov--tensao .mov__texto { grid-column: 1; }
+  /* I: coluna unica. Texto e lista nao precisam de coluna de apoio, e a
+     de apoio ficava vazia pela altura toda do texto. */
+  .mov--tensao { grid-template-columns: minmax(0, 1fr); }
 
   /* IV: chamada ao lado do texto, nao embaixo dele com vazio a direita. */
   .mov--liberacao .grande { grid-column: 1; }
@@ -126,7 +127,12 @@
   padding-bottom: var(--e3);
   border-bottom: 1px solid var(--aresta);
 }
-.mov__num { margin: 0; }
+.mov__num {
+  margin: 0;
+  font-size: var(--t-min);
+  letter-spacing: .3em;
+  color: var(--vinho-vivo);
+}
 .mov__nome {
   font-family: var(--serifa); font-style: italic; font-weight: 300;
   font-size: var(--t-mov); line-height: 1; color: var(--osso);
@@ -174,18 +180,24 @@
 /* ── Gêneros: nomeados com precisão, como o briefing exige ──────────── */
 .generos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  grid-template-columns: minmax(0, 1fr);
   border-top: 1px solid var(--aresta);
   margin-top: var(--e3);
+}
+@media (min-width: 46rem) {
+  .generos { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--e6); }
+  /* Fio de fechamento a direita: a lista tem limite, nao esvai. */
+  .generos li:nth-child(odd) { border-right: 1px solid var(--aresta); padding-right: var(--e4); }
 }
 .generos li {
   font-family: var(--sans); font-size: var(--t-min);
   font-stretch: 88%; letter-spacing: .06em;
   padding: var(--e3) 0;
-  border-bottom: 1px solid var(--aresta);
+  border-bottom: 1px solid var(--aresta-clara);
   color: var(--osso);
 }
 .nota { margin: var(--e3) 0 0; }
+.mov--tensao { padding-bottom: var(--e6); }
 
 .mov { isolation: isolate; }
 .mov__fundo { position: absolute; inset: 0; z-index: -2; }
@@ -215,17 +227,28 @@
 
 
 
-/* No lugar da foto removida: a frase que se repete até virar textura.
-   O assunto da seção é repetição — a página faz, não descreve. */
+/* A seção fala de repetição, então a página repete. Cada camada perde
+   peso, como uma linha que se afunda até virar transe. */
 .eco {
   grid-column: 1 / -1;
-  font-family: var(--serifa); font-style: italic; font-weight: 300;
-  font-size: clamp(1.15rem, 5.4vw, 4.4rem); line-height: 1.06;
-  color: transparent; -webkit-text-stroke: 1px var(--aresta);
-  margin: var(--e4) 0 0; user-select: none; overflow: hidden;
-  white-space: nowrap;
+  margin: var(--e5) 0 0;
+  user-select: none;
+  overflow: hidden;
+  display: grid;
+  gap: 0;
 }
-.eco::after { content: " · a repetição sustenta · a repetição sustenta"; }
+.eco span {
+  font-family: var(--serifa); font-style: italic; font-weight: 300;
+  font-size: clamp(1.5rem, 5.2vw, 3.6rem);
+  line-height: .92;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--aresta-clara);
+}
+.eco span:nth-child(2) { opacity: .74; }
+.eco span:nth-child(3) { opacity: .52; }
+.eco span:nth-child(4) { opacity: .34; }
+.eco span:nth-child(5) { opacity: .18; }
 
 /* ── IV · A chegada ────────────────────────────────────────────────── */
 .chamada {
