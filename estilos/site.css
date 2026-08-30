@@ -212,7 +212,11 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   margin-top: var(--e3);
-  gap: var(--e2) var(--e4);
+  gap: var(--e1) var(--e4);
+  /* Duas colunas no mobile: com oito termos, a coluna unica esticava a secao
+     sem necessidade — e Tensao e justamente a que deve ser a mais compacta
+     das quatro. Os rotulos sao curtos e cabem. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 @media (min-width: 46rem) {
   /* Deixa de ser grade de celulas com borda — que lia como planilha de
