@@ -261,11 +261,15 @@
 .mov--suspensao::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(to bottom, var(--breu) 0%, rgba(10,6,9,.46) 16%, rgba(10,6,9,.46) 84%, var(--breu) 100%),
+    /* .46 no miolo ainda apagava a foto inteira. O texto vive na COLUNA
+       ESQUERDA, entao o escurecimento tem de ser lateral, nao geral — a
+       faixa de cima e de baixo continua, para a secao nascer e morrer no
+       breu, mas o meio abre. */
+    linear-gradient(to bottom, var(--breu) 0%, rgba(10,6,9,.18) 14%, rgba(10,6,9,.18) 86%, var(--breu) 100%),
     /* Era .88 na esquerda, e a esquerda e exatamente onde o texto fica: a mao
        no CDJ nunca aparecia no desktop. A foto cujo trabalho e apontar para
        coisa fisica era a unica que o overlay apagava. */
-    linear-gradient(to right, rgba(46,11,24,.74) 0%, rgba(46,11,24,.34) 54%, rgba(46,11,24,.12) 100%);
+    linear-gradient(to right, rgba(10,6,9,.86) 0%, rgba(10,6,9,.62) 34%, rgba(46,11,24,.10) 68%, transparent 100%);
 }
 .casa { max-width: var(--medida); }
 .casa__marca {
@@ -280,7 +284,9 @@
   padding-left: var(--e3); border-left: 2px solid var(--vinho-vivo);
 }
 .lema em { font-style: italic; color: var(--vinho-vivo); }
-.casa__nota { color: var(--fumaca); margin: 0; }
+.casa__nota { /* MEDIDO: --fumaca dava 4.56:1 sobre a foto, contra 4.5 exigidos.
+     Margem de 0.06 nao e aprovacao confiavel. */
+  color: var(--fumaca-clara); margin: 0; }
 
 
 
