@@ -63,12 +63,26 @@
 .limiar::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(to top, var(--breu) 0%, rgba(10,6,9,.86) 26%, rgba(10,6,9,.30) 62%, rgba(10,6,9,.10) 100%),
-    linear-gradient(to right, rgba(10,6,9,.82) 0%, rgba(10,6,9,.30) 38%, transparent 70%),
-    linear-gradient(0deg, rgba(94,20,38,.20), rgba(94,20,38,.20));
+    /* Aliviados: foram calibrados quando a foto era clara e azulada, e
+       precisavam escurecer muito para o texto assentar. A foto agora ja e
+       vinho escuro, e o peso antigo apagava a metade de baixo da imagem. */
+    linear-gradient(to top, var(--breu) 0%, rgba(10,6,9,.58) 22%, rgba(10,6,9,.16) 58%, transparent 100%),
+    /* .78/.34 e nao .72/.22: com o valor menor, o rotulo "DJ E PRODUTORA"
+       ficava em 4.43:1 contra o pior pixel de fundo, e o minimo e 4.5. O
+       texto precisava de CHAO, nao de cor mais clara — mudar o token teria
+       achatado a hierarquia para resolver um problema de fundo. */
+    linear-gradient(to right, rgba(10,6,9,.78) 0%, rgba(10,6,9,.34) 42%, transparent 74%);
+    /* A camada de vinho a 20% saiu: era ela que, sobre a foto AZUL, produzia
+       o roxo que o briefing recusa nominalmente. Com a foto ja em vinho, ela
+       so somava saturacao sem acrescentar nada. */
 }
 
-.sobrenome { margin: 0 0 var(--e3); }
+/* MEDIDO em pixels sobre a foto: com --fumaca dava 3.52:1 contra o pior
+   fundo (rgb 115,35,50), abaixo dos 4.5 exigidos. O calculo comum nao pegava
+   porque comparava com o --breu de queda, e nao com o que esta na tela.
+
+   O token --fumaca-clara existe exatamente para superficie de vinho. */
+.sobrenome { margin: 0 0 var(--e3); color: var(--fumaca-clara); }
 
 .nome {
   font-family: var(--serifa);
@@ -197,25 +211,47 @@
 .generos {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  border-top: 1px solid var(--aresta);
   margin-top: var(--e3);
+  gap: var(--e2) var(--e4);
 }
 @media (min-width: 46rem) {
-  .generos { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--e6); }
-  /* Fio de fechamento a direita: a lista tem limite, nao esvai. */
-  .generos li:nth-child(odd) { border-right: 1px solid var(--aresta); padding-right: var(--e4); }
+  /* Deixa de ser grade de celulas com borda — que lia como planilha de
+     servicos, e servia a qualquer lista — e vira uma FAIXA que corre do que
+     arrasta ao que corta, na ordem que a nota abaixo dela ja anuncia. */
+  .generos { display: flex; flex-wrap: wrap; align-items: baseline; }
 }
 .generos li {
   font-family: var(--sans); font-size: var(--t-min);
   font-stretch: 88%; letter-spacing: .06em;
-  padding: var(--e3) 0;
-  border-bottom: 1px solid var(--aresta-clara);
-  color: var(--osso);
+  padding: var(--e2) 0;
+  color: var(--fumaca);
+  position: relative;
   transition: color var(--rapido) var(--curva), transform var(--medio) var(--curva);
 }
-.generos li:hover { color: var(--vinho-vivo); transform: translateX(.4rem); }
+/* O separador e um fio de vinho ENTRE os itens, nao uma caixa em volta de
+   cada um: liga a sequencia em vez de compartimentar. */
+@media (min-width: 46rem) {
+  .generos li + li::before {
+    content: ""; position: absolute; left: calc(var(--e4) / -2); top: .55em;
+    width: 1px; height: .9em; background: var(--vinho);
+  }
+}
+.generos li:hover { color: var(--osso); }
 .nota { margin: var(--e3) 0 0; }
-.mov--tensao { padding-bottom: var(--e6); }
+/* ── Ritmo dos movimentos ─────────────────────────────────────────────
+   As quatro secoes ocupavam 84 / 102 / 105 / 62vh — quase iguais, e com a
+   ULTIMA sendo a menor. Isso contradiz duas coisas do briefing ao mesmo
+   tempo: "progressoes graduais" e "construcao gradual" descrevem um set que
+   abre apertado e vai abrindo, e a secao IV e onde o booking acontece.
+
+   A forma agora e 79 / 96 / 105 / 82vh: aperta, abre, chega ao pico, libera.
+   Nao e crescimento monotono, e de proposito — um set que so cresce nao tem
+   forma. O briefing descreve "abertura, queda e respiro", e e essa a curva.
+
+   Tensao e a menor porque tensao E compressao. Expansao e o pico. Liberacao
+   nao precisa ser a maior, precisa ter PRESENCA: ela vinha em 62vh, a menor
+   de todas, e era justamente onde o booking acontece. */
+.mov--tensao { padding-block: var(--e6) var(--e5); }
 
 .mov { isolation: isolate; }
 .mov__fundo { position: absolute; inset: 0; z-index: -2; }
@@ -225,8 +261,11 @@
 .mov--suspensao::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(to bottom, var(--breu) 0%, rgba(10,6,9,.58) 18%, rgba(10,6,9,.58) 82%, var(--breu) 100%),
-    linear-gradient(to right, rgba(46,11,24,.88) 0%, rgba(46,11,24,.52) 52%, rgba(46,11,24,.30) 100%);
+    linear-gradient(to bottom, var(--breu) 0%, rgba(10,6,9,.46) 16%, rgba(10,6,9,.46) 84%, var(--breu) 100%),
+    /* Era .88 na esquerda, e a esquerda e exatamente onde o texto fica: a mao
+       no CDJ nunca aparecia no desktop. A foto cujo trabalho e apontar para
+       coisa fisica era a unica que o overlay apagava. */
+    linear-gradient(to right, rgba(46,11,24,.74) 0%, rgba(46,11,24,.34) 54%, rgba(46,11,24,.12) 100%);
 }
 .casa { max-width: var(--medida); }
 .casa__marca {
@@ -261,12 +300,16 @@
   line-height: .92;
   white-space: nowrap;
   color: transparent;
-  -webkit-text-stroke: 1px var(--aresta-clara);
+  /* Era --aresta-clara (#3A2830), que da 1.46:1 sobre o breu: invisivel, e
+     lido como falha de renderizacao em vez de intencao. O contorno agora
+     comeca em vinho-fio e some ao longo das cinco camadas — a repeticao
+     PRECISA ser vista para funcionar como repeticao. */
+  -webkit-text-stroke: 1px var(--vinho-fio);
 }
-.eco span:nth-child(2) { opacity: .74; }
-.eco span:nth-child(3) { opacity: .52; }
-.eco span:nth-child(4) { opacity: .34; }
-.eco span:nth-child(5) { opacity: .18; }
+.eco span:nth-child(2) { opacity: .62; }
+.eco span:nth-child(3) { opacity: .40; }
+.eco span:nth-child(4) { opacity: .24; }
+.eco span:nth-child(5) { opacity: .12; }
 
 /* ── IV · A chegada ────────────────────────────────────────────────── */
 .chamada {
@@ -289,7 +332,7 @@
   .chamada:hover { transform: none; }
 }
 
-.mov--liberacao { padding-bottom: var(--e5); }
+.mov--liberacao { padding-block: var(--e7) var(--e8); }
 
 /* ── Rodapé: fecha o set, nao indexa o site ────────────────────────── */
 .rodape {
@@ -332,7 +375,10 @@
    sem gritar. É o eco do LIMIAR — o set fecha onde abriu. */
 .assinatura {
   font-family: var(--serifa); font-weight: 300;
-  font-size: clamp(2.6rem, 13vw, 11rem); line-height: .8;
+  /* Era .8, e cortava os descendentes do "p" e do "y" contra o limite da
+     caixa — o nome dela aparecia decepado, o que lia como acidente. */
+  font-size: clamp(2.6rem, 13vw, 11rem); line-height: 1.04;
+  padding-bottom: .06em;
   letter-spacing: .06em;
   color: transparent;
   -webkit-text-stroke: 1px var(--aresta-clara);
@@ -379,4 +425,36 @@
 }
 .agenda__onde {
   font-family: var(--serifa); color: var(--osso);
+}
+
+/* ── Alvos de toque ──────────────────────────────────────────────────
+   Medido antes: nav 19px, "Entrar no set" 34px, ação do rodapé 29px,
+   marca 15px. O mínimo confortável é 44x44 (WCAG 2.2).
+
+   O aumento vem de padding, nunca de fonte maior: o desenho tipográfico é
+   decisão do briefing e não deve mudar para resolver um problema de mão.
+
+   Uma primeira tentativa usou pseudo-elemento absoluto para ampliar só a
+   área sensível. Funciona, mas não é medível — `getBoundingClientRect` segue
+   devolvendo a caixa do link, e um alvo que eu não consigo medir é um alvo
+   que não consigo garantir. Padding é verificável. */
+.topo nav a { padding-block: .9rem; display: inline-block; }
+.marca { padding-block: .70rem; display: inline-block; }
+.entrar { padding-block: .70rem; }
+.rodape__acao { padding-block: .8rem; display: inline-block; }
+.chamada { min-height: 44px; }
+
+@media (max-width: 46rem) {
+  /* No mobile "O set" tinha 33px de LARGURA. Alvo de toque tem duas
+     dimensoes, e so a altura tinha sido resolvida. */
+  .topo nav a { min-width: 44px; text-align: center; }
+}
+
+@media (min-width: 60rem) {
+  /* A progressao vale sobretudo aqui, onde ha altura de sobra para ela ser
+     percebida como ritmo e nao como acidente de quebra de linha. */
+  .mov--tensao { padding-block: var(--e6) var(--e6); }
+  .mov--suspensao { padding-block: var(--e7) var(--e7); }
+  .mov--expansao { padding-block: var(--e7) var(--e8); }
+  .mov--liberacao { padding-block: var(--e8) var(--e8); }
 }
