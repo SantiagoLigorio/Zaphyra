@@ -468,3 +468,42 @@
   .mov--expansao { padding-block: var(--e7) var(--e8); }
   .mov--liberacao { padding-block: var(--e8) var(--e8); }
 }
+
+/* ── Redes ───────────────────────────────────────────────────────────
+   Por extenso, e nao em icone: icone de plataforma envelhece a cada
+   rebranding, e o NOME do perfil e informacao — o do SoundCloud tem dois
+   zz, e ninguem adivinharia a partir de um logo.
+
+   O arroba fica em --fumaca e o nome da plataforma em --osso: quem procura
+   "onde ela esta" le a plataforma, e quem vai copiar o perfil acha o
+   arroba. Duas leituras, uma linha. */
+.redes {
+  list-style: none;
+  margin: var(--e3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e1);
+}
+.redes a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding-block: .72rem;          /* alvo de toque: 44px */
+  font-family: var(--sans);
+  font-size: var(--t-min);
+  font-stretch: 88%;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--osso);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.redes a span {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--serifa);
+  font-size: .95rem;
+  color: var(--fumaca);
+}
+.redes a:hover { border-bottom-color: var(--vinho-fio); }
+.redes a:hover span { color: var(--vinho-vivo); }
