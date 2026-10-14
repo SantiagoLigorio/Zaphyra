@@ -1,6 +1,0 @@
-.DS_Store
-Thumbs.db
-node_modules/
-
-# Esta pasta contem SO o que vai para o ar. Originais de camera vivem em
-# ../FOTOS, gravacoes em ../SETS, e manifesto e notas em ../material.
