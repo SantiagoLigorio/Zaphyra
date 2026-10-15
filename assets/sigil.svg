@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 760" fill="none">
+  <g stroke="#fff" stroke-width=".85" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="380" cy="380" r="244" opacity=".36"/><circle cx="380" cy="380" r="266" opacity=".2"/><circle cx="380" cy="380" r="219" opacity=".25"/>
+    <ellipse cx="380" cy="380" rx="104" ry="275" transform="rotate(0 380 380)" opacity=".66"/>
+    <ellipse cx="380" cy="380" rx="104" ry="275" transform="rotate(45 380 380)" opacity=".8"/>
+    <ellipse cx="380" cy="380" rx="104" ry="275" transform="rotate(90 380 380)" opacity=".5"/>
+    <ellipse cx="380" cy="380" rx="104" ry="275" transform="rotate(135 380 380)" opacity=".8"/>
+    <path d="M380 104C444 177 458 255 380 380S316 585 380 656" opacity=".8"/>
+    <path d="M380 104C316 177 302 255 380 380s64 205 0 276" opacity=".8"/>
+    <path d="M104 380C177 316 255 302 380 380s205 64 276 0" opacity=".55"/>
+    <path d="M104 380C177 444 255 458 380 380s205-64 276 0" opacity=".55"/>
+    <path d="M218 218C290 255 338 309 380 380c42 71 90 125 162 162M542 218C470 255 422 309 380 380c-42 71-90 125-162 162" opacity=".55"/>
+    <path d="M380 147C344 212 344 278 380 342c36-64 36-130 0-195ZM613 380C548 344 482 344 418 380c64 36 130 36 195 0ZM380 613c36-65 36-131 0-195-36 64-36 130 0 195ZM147 380c65 36 131 36 195 0-64-36-130-36-195 0Z" opacity=".38"/>
+    <circle cx="380" cy="380" r="66"/><circle cx="380" cy="380" r="36" opacity=".6"/>
+    <path d="M380 311c28 28 28 110 0 138-28-28-28-110 0-138Z" opacity=".8"/>
+    <path d="M311 380c28-28 110-28 138 0-28 28-110 28-138 0Z" opacity=".8"/>
+  </g>
+</svg>
